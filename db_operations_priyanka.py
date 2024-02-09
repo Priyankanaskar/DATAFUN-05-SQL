@@ -70,7 +70,7 @@ import pathlib
 sql_file = pathlib.Path( "matche.sql")  # Check if this is correct
 try:
     with sqlite3.connect(db_file) as conn:
-        sql_file = pathlib.Path("sql", "matches.sql")
+        sql_file = pathlib.Path("matches.sql")
         with open(sql_file, "r") as file:
             sql_script = file.read()
         conn.executescript(sql_script)
@@ -104,7 +104,7 @@ def create_tables():
     """Function to read and execute SQL statements to create tables"""
     try:
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("sql","matchedetails.sql")
+            sql_file = pathlib.Path("matchdetails.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -113,7 +113,7 @@ def create_tables():
         print("Error creating tables:", e)
 try:
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("sql","matches.sql")
+            sql_file = pathlib.Path("matches.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -125,13 +125,13 @@ def insert_data_from_csv():
     and insert the records into their respective tables."""
     try:
         game_data_path = pathlib.Path("data", "game.csv")
-        gamestails_data_path = pathlib.Path("data", "gamesdetails.csv")
+        gamesdetails_data_path = pathlib.Path("data", "gamesdetails.csv")
         game_df = pd.read_csv(game_data_path)
         gamesdetails_df = pd.read_csv(gamesdetails_data_path)
         with sqlite3.connect(db_file) as conn:
             # use the pandas DataFrame to_sql() method to insert data
             # pass in the table name and the connection
-            games_df.to_sql("games", conn, if_exists="replace", index=False)
+            game_df.to_sql("games", conn, if_exists="replace", index=False)
             gamesdetails_df.to_sql("gamesdetails", conn, if_exists="replace", index=False)
             print("Data inserted successfully.")
     except (sqlite3.Error, pd.errors.EmptyDataError, FileNotFoundError) as e:
@@ -141,6 +141,31 @@ def main():
     create_database()
     create_tables()
     insert_data_from_csv()
+
+if __name__ == "__main__":
+    main()
+
+import sqlite3
+import pandas as pd
+import pathlib
+
+# Define the database file in the current root project directory
+db_file = pathlib.Path("score.db")
+
+def query_data():
+    """Function to execute a SQL SELECT query and print the result"""
+    try:
+        with sqlite3.connect(db_file) as conn:
+            # Use pandas to read the result of the query into a DataFrame
+            result_df = pd.read_sql_query("SELECT * FROM game;", conn)
+            
+            # Print the result DataFrame
+            print(result_df)
+    except sqlite3.Error as e:
+        print("Error querying data:", e)
+
+def main():
+    query_data()
 
 if __name__ == "__main__":
     main()
