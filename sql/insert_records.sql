@@ -1,5 +1,6 @@
+-- database: ../project.db
 -- Insert authors data
-INSERT INTO authors (author_id, first_name, last_name, year_born)
+INSERT INTO authors (author_id, first_name, last_name, year_published)
 VALUES
     ('10f88232-1ae7-4d88-a6a2-dfcebb22a596', 'Harper', 'Lee', NULL),
     ('c3a47e85-2a6b-4196-a7a8-8b55d8fc1f70', 'George', 'Orwell', NULL),
@@ -13,7 +14,7 @@ VALUES
     ('6b693b96-394a-4a1d-a4e2-792a47d7a568', 'J.K.', 'Rowling', NULL);
 
 
--- Insert books data
+-- #Insert books data
 INSERT INTO books (book_id, title, year_published, author_id)
 VALUES
     ('d6f83870-ff21-4a5d-90ab-26a49ab6ed12', 'To Kill a Mockingbird', 1960, '10f88232-1ae7-4d88-a6a2-dfcebb22a596'),
@@ -23,4 +24,4 @@ VALUES
     ('c2a62a4b-cf5c-4246-9bf7-b2601d542e6d', 'The Catcher in the Rye', 1951, '8d8107b6-1f24-481c-8a21-7d72b13b59b5'),
     ('3a1d835c-1e15-4a48-8e8c-b12239604e98', 'Fahrenheit 451', 1953, '0cc3c8e4-e0c0-482f-b2f7-af87330de214'),
     ('c6e67918-e509-4a6b-bc3a-979f6ad802f0', 'Pride and Prejudice', 1813, '4dca0632-2c53-490c-99d5-4f6d41e56c0e'),
-    ('be951205-6cc2-4b3d-96f1-7257b8fc8c0f', 'The Hobbit', 1937, '16f3e0a1-24cb-4ed6-a50
+    ('be951205-6cc2-4b3d-96f1-7257b8fc8c0f', 'The Hobbit', 1937,'16f3e0a1-24cb-4ed6-a500');
