@@ -1,6 +1,6 @@
 import logging
-
 # Configure logging to write to a file, appending new logs to the existing file
+
 logging.basicConfig(filename='log.txt', level=logging.DEBUG, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
 logging.info("Program started") # add this at the beginning of the main method
@@ -46,8 +46,8 @@ def insert_data_from_csv():
         authors_df = pd.read_csv(author_data_path)
         books_df = pd.read_csv(book_data_path)
         with sqlite3.connect(db_file) as conn:
-            # use the pandas DataFrame to_sql() method to insert data
-            # pass in the table name and the connection
+ # use the pandas DataFrame to_sql() method to insert data
+ # pass in the table name and the connection
             authors_df.to_sql("authors", conn, if_exists="replace", index=False)
             books_df.to_sql("books", conn, if_exists="replace", index=False)
             print("Data inserted successfully.")
@@ -62,12 +62,9 @@ def main():
 if __name__ == "__main__":
     main()
 
-import sqlite3
-import pandas as pd
-import pathlib
 
 
-sql_file = pathlib.Path( "matche.sql")  # Check if this is correct
+sql_file = pathlib.Path( "matche.sql")  
 try:
     with sqlite3.connect(db_file) as conn:
         sql_file = pathlib.Path("matches.sql")
@@ -129,8 +126,8 @@ def insert_data_from_csv():
         game_df = pd.read_csv(game_data_path)
         gamesdetails_df = pd.read_csv(gamesdetails_data_path)
         with sqlite3.connect(db_file) as conn:
-            # use the pandas DataFrame to_sql() method to insert data
-            # pass in the table name and the connection
+# use the pandas DataFrame to_sql() method to insert data
+# pass in the table name and the connection
             game_df.to_sql("games", conn, if_exists="replace", index=False)
             gamesdetails_df.to_sql("gamesdetails", conn, if_exists="replace", index=False)
             print("Data inserted successfully.")
@@ -156,10 +153,28 @@ def query_data():
     """Function to execute a SQL SELECT query and print the result"""
     try:
         with sqlite3.connect(db_file) as conn:
-            # Use pandas to read the result of the query into a DataFrame
-            result_df = pd.read_sql_query("SELECT * FROM game;", conn)
+ # Use pandas to read the result of the query into a DataFrame
+            result_df = pd.read_sql_query ( "SELECT * FROM game;", conn)
+
+            result_df2 = pd.read_sql_query("SELECT * FROM game WHERE id = 5;", conn)
+
+            result_df2 = pd.read_sql_query("SELECT * FROM game ORDER BY date asc", conn)
+
+            result_df2 = pd.read_sql_query("SELECT COUNT(*) FROM gamesdetails",conn)
+
+            result_df2 = pd.read_sql_query("SELECT COUNT(*) FROM game",conn)
+
+            result_df2 = pd.read_sql_query 
+            ("DELETE FROM games WHERE city = Pune ",conn) 
+
+            result_df2 = pd.read_sql_query
+            ("SELECT * FROM  ORDER BY city DESC",conn)
+
             
-            # Print the result DataFrame
+
+
+
+ # Print the result DataFrame
             print(result_df)
     except sqlite3.Error as e:
         print("Error querying data:", e)
